@@ -546,8 +546,19 @@
         }
         
         function finishChallenge() {
-            zenerContainer.style.display = 'none';
-            successContainer.style.display = 'block';
+            // Check if player has enough correct answers
+            if (correctAnswers >= 7) {
+                // Success - show completion screen
+                zenerContainer.style.display = 'none';
+                successContainer.style.display = 'block';
+            } else {
+                // Not enough correct answers - show retry message
+                alert(`You only correctly identified ${correctAnswers} out of ${totalRounds} symbols. You need at least 7 correct answers to proceed. Please try again.`);
+                // Reset and restart challenge
+                setTimeout(() => {
+                    initZenerChallenge();
+                }, 1000);
+            }
         }
         
         function generateAccessCode() {
