@@ -5,165 +5,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Veil Between Minds</title>
     <style>
-        :root {
-            --primary: #5d00b3;
-            --secondary: #00d0ff;
-            --bg-dark: #0a0a1a;
-            --text-light: #ffffff;
-            --success: #00ff88;
-            --hidden: rgba(255, 255, 255, 0.05);
-        }
-        
-        body, html {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0a0a1a;
+            color: white;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            height: 100%;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
             text-align: center;
-            padding: 0 20px;
-            position: relative;
         }
         
         .header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            background: linear-gradient(90deg, #5d00b3, #00d0ff);
             padding: 20px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            z-index: 100;
-            animation: header-glow 3s infinite alternate;
+            margin-bottom: 30px;
         }
         
-        @keyframes header-glow {
-            0% { box-shadow: 0 4px 20px rgba(93, 0, 179, 0.4); }
-            100% { box-shadow: 0 4px 30px rgba(0, 208, 255, 0.7); }
-        }
-        
-        .hint-text {
-            font-style: italic;
-            margin: 20px 0;
-            opacity: 0.8;
-            font-size: 1.1rem;
-            max-width: 600px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
         }
         
         .login-form {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(8px);
-            width: 100%;
-            max-width: 400px;
-            transition: all 0.3s ease;
-            margin-top: 80px;
+            margin-bottom: 20px;
         }
         
-        .login-form:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(93, 0, 179, 0.3);
+        .zener-container, .success-container, .admin-container {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
         }
         
         input {
-            width: 100%;
-            padding: 12px;
+            padding: 10px;
             margin: 10px 0;
+            width: 100%;
+            max-width: 300px;
+            background-color: rgba(255, 255, 255, 0.2);
             border: none;
             border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--text-light);
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        input:focus {
-            outline: none;
-            background-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 0 2px var(--secondary);
+            color: white;
         }
         
         button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
+            padding: 10px 20px;
+            margin: 10px 0;
+            background: linear-gradient(90deg, #5d00b3, #00d0ff);
             border: none;
             border-radius: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: var(--text-light);
-            font-size: 1rem;
-            font-weight: bold;
+            color: white;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(93, 0, 179, 0.4);
         }
         
         button:disabled {
             opacity: 0.5;
-            transform: none;
-            box-shadow: none;
             cursor: not-allowed;
         }
         
-        .hint-dots {
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .card {
+            width: 100px;
+            height: 150px;
+            background-color: #5d00b3;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .card-back {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
-            font-size: 12px;
-            color: var(--hidden);
-            letter-spacing: 3px;
-        }
-        
-        .zener-container {
-            display: none;
             width: 100%;
-            max-width: 800px;
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(8px);
-            margin-top: 80px;
+            height: 100%;
+            background-color: #5d00b3;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: rgba(255, 255, 255, 0.2);
+            z-index: 2;
         }
         
-        .zener-title {
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            font-weight: bold;
-            background: linear-gradient(90deg, var(--secondary), var(--primary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .card-front {
+            z-index: 1;
+            background-color: white;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .zener-subtitle {
-            margin-bottom: 30px;
-            opacity: 0.8;
+        .symbol-img {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .card.flipped .card-back {
+            display: none;
+        }
+        
+        .card.correct {
+            box-shadow: 0 0 15px #00ff88;
+        }
+        
+        .card.incorrect {
+            box-shadow: 0 0 15px #ff3366;
         }
         
         .round-indicator {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin: 20px 0;
         }
         
         .round-dot {
@@ -171,303 +143,130 @@
             height: 10px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.2);
-            margin: 0 5px;
         }
         
         .round-dot.active {
-            background-color: var(--secondary);
-            box-shadow: 0 0 10px var(--secondary);
+            background-color: #00d0ff;
         }
         
         .round-dot.correct {
-            background-color: var(--success);
-            box-shadow: 0 0 10px var(--success);
+            background-color: #00ff88;
         }
         
         .round-dot.incorrect {
             background-color: #ff3366;
-            box-shadow: 0 0 10px #ff3366;
         }
         
-        .cards-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .card {
-            width: 100px;
-            height: 160px;
-            background: linear-gradient(135deg, #6b00c9, #3d007a);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            position: relative;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(93, 0, 179, 0.4);
-        }
-        
-        .card-back, .card-front {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.6s;
-        }
-        
-        .card-back {
-            background: linear-gradient(135deg, #6b00c9, #3d007a);
-            transform: rotateY(0deg);
-        }
-        
-        .card-back::after {
-            content: "?";
-            font-size: 50px;
-            font-weight: bold;
+        .hint-dots {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
             color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .card-front {
-            background-color: white;
-            transform: rotateY(180deg);
-        }
-        
-        .card.flipped .card-back {
-            transform: rotateY(180deg);
-        }
-        
-        .card.flipped .card-front {
-            transform: rotateY(0deg);
-        }
-        
-        .card-symbol {
-            width: 60px;
-            height: 60px;
-            fill: var(--primary);
-        }
-        
-        .card-glow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            box-shadow: 0 0 30px var(--secondary);
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        
-        .card.correct .card-glow {
-            opacity: 1;
-            box-shadow: 0 0 30px var(--success);
-        }
-        
-        .card.incorrect .card-glow {
-            opacity: 1;
-            box-shadow: 0 0 30px #ff3366;
-        }
-        
-        .zener-progress {
-            height: 10px;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        
-        .zener-progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 5px;
-            transition: width 0.5s ease;
-        }
-        
-        .target-container {
-            margin: 20px 0;
-            font-size: 1.2rem;
-        }
-        
-        .target-text {
-            font-weight: bold;
-            color: var(--secondary);
-        }
-        
-        .success-container {
-            display: none;
-            text-align: center;
-            animation: fadeIn 1s ease;
-            max-width: 600px;
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(8px);
-            margin-top: 80px;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .success-message {
-            font-size: 1.5rem;
-            color: var(--success);
-            margin-bottom: 20px;
-        }
-        
-        .name-input {
-            margin: 20px 0;
+            font-size: 18px;
+            letter-spacing: 3px;
         }
         
         .key-display {
-            font-family: monospace;
-            font-size: 1.2rem;
-            padding: 15px;
-            margin: 20px 0;
             background-color: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--success);
+            border: 1px solid #00ff88;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 400px;
             border-radius: 5px;
             display: none;
-            animation: glow 2s infinite alternate;
+            font-family: monospace;
         }
         
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px rgba(0, 255, 136, 0.3); }
-            100% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.7); }
-        }
-        
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.6;
-        }
-        
-        .admin-container {
-            display: none;
-            width: 100%;
-            max-width: 800px;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
-            margin-top: 80px;
-            text-align: left;
-        }
-        
-        .admin-title {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-        
-        .admin-table {
+        table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin: 20px 0;
         }
         
-        .admin-table th, .admin-table td {
+        th, td {
             padding: 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .admin-table th {
-            background-color: rgba(255, 255, 255, 0.1);
             text-align: left;
         }
         
-        .admin-table tr:hover {
-            background-color: rgba(255, 255, 255, 0.05);
+        th {
+            background-color: rgba(255, 255, 255, 0.1);
         }
         
-        .admin-export {
-            margin-top: 20px;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            padding: 10px 20px;
+        /* Add this for high-visibility hint */
+        .hint-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
-            cursor: pointer;
+            font-size: 12px;
+            text-align: left;
+        }
+        
+        .completion-record-form {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            max-width: 300px;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        Beyond the Veil: Only Those Who See Beyond Eyes May Pass
+        <h1>Beyond the Veil: Only Those Who See Beyond Eyes May Pass</h1>
     </div>
     
     <div class="container">
         <div class="login-form" id="loginForm">
             <h2>Access Key Required</h2>
-            <p class="hint-text">Those who've proven their worth before may enter. The smallest signs often reveal the greatest truths. Look where others don't.</p>
+            <p>Those who've proven their worth before may enter. The smallest signs often reveal the greatest truths.</p>
             <input type="password" id="keyInput" placeholder="Enter your key">
+            <br>
             <button id="loginButton">Access Challenge</button>
         </div>
         
         <div class="zener-container" id="zenerContainer">
-            <div class="zener-title">The Zener Challenge</div>
-            <div class="zener-subtitle">Divine the correct symbol in each of the 10 rounds. True psychics need no assistance... but sometimes the cosmic hints are in plain sight.</div>
+            <h2>The Zener Challenge</h2>
+            <p>Divine the correct symbol in each of the 10 rounds. True psychics need no assistance... but sometimes the cosmic hints are in plain sight.</p>
             
-            <div class="round-indicator" id="roundIndicator">
-                <!-- Will be filled by JavaScript -->
-            </div>
+            <div class="round-indicator" id="roundIndicator"></div>
             
-            <div class="target-container">
-                Identify the <span class="target-text" id="targetSymbol">circle</span> card:
-            </div>
+            <h3>Identify the <span id="targetSymbol">circle</span> card:</h3>
             
-            <div class="cards-container" id="cardsContainer">
-                <!-- Will be filled by JavaScript -->
-            </div>
+            <div class="cards-container" id="cardsContainer"></div>
             
-            <div class="zener-progress">
-                <div class="zener-progress-bar" id="progressBar"></div>
-            </div>
+            <!-- No hint explanation -->
             
             <div class="hint-dots" id="hintDots"></div>
         </div>
         
         <div class="success-container" id="successContainer">
-            <div class="success-message">Your perception reaches beyond the veil!</div>
+            <h2>Your perception reaches beyond the veil!</h2>
             <p>You've completed the Zener challenge and proven your extraordinary abilities.</p>
-            <div class="name-input">
+            
+            <div>
                 <p>Enter your name to receive your unique access code:</p>
                 <input type="text" id="nameInput" placeholder="Your name">
+                <br>
                 <button id="revealCodeBtn">Reveal My Code</button>
             </div>
+            
             <div class="key-display" id="accessKey"></div>
             <p>Remember this code for your journey ahead.</p>
         </div>
         
         <div class="admin-container" id="adminContainer">
-            <div class="admin-title">Challenge Completion Records</div>
+            <h2>Challenge Completion Records</h2>
             <p>Here are all the individuals who have completed the Zener challenge:</p>
-            <table class="admin-table" id="adminTable">
+            
+            <table id="adminTable">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -476,135 +275,134 @@
                         <th>Timestamp</th>
                     </tr>
                 </thead>
-                <tbody id="adminTableBody">
-                    <!-- Will be filled by JavaScript -->
-                </tbody>
+                <tbody id="adminTableBody"></tbody>
             </table>
-            <button class="admin-export" id="exportButton">Export Data</button>
+            
+            <button id="exportButton">Export Data</button>
+            <button id="clearButton">Clear Data</button>
+        </div>
+        
+        <!-- Hidden form for sending completion data -->
+        <div class="completion-record-form" id="completionForm">
+            <h3>Record Completion</h3>
+            <form action="https://formspree.io/f/your-formspree-id" method="POST" id="completionRecordForm">
+                <input type="hidden" name="name" id="formName">
+                <input type="hidden" name="code" id="formCode">
+                <input type="hidden" name="score" id="formScore">
+                <input type="hidden" name="timestamp" id="formTimestamp">
+                <button type="submit">Send Completion Record</button>
+            </form>
+            <p>Please click "Send Completion Record" to finish.</p>
         </div>
     </div>
-    
-    <canvas class="particles" id="particles"></canvas>
-    
+
     <script>
-        // Constants and variables
+        // Constants
         const correctKey = "X8#rT!k@P$z9&L*m2Q";
-        const adminKey = "1123581321"; // Fibonacci sequence for admin access
+        const adminKey = "1123581321";
         const symbols = ["circle", "square", "wavy-lines", "cross", "star"];
+        
+        // Variables
         let currentRound = 0;
         let totalRounds = 10;
         let correctAnswers = 0;
         let roundSequence = [];
-        let uniqueAccessCode = "";
         let cardsFlipped = 0;
         
-        // SVG symbols for Zener cards
-        const symbolSVGs = {
-            "circle": '<svg class="card-symbol" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="none" /></svg>',
-            "square": '<svg class="card-symbol" viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" stroke="black" stroke-width="3" fill="none" /></svg>',
-            "wavy-lines": '<svg class="card-symbol" viewBox="0 0 100 100"><path d="M20,30 C30,20 40,40 50,30 C60,20 70,40 80,30" stroke="black" stroke-width="3" fill="none" /><path d="M20,50 C30,40 40,60 50,50 C60,40 70,60 80,50" stroke="black" stroke-width="3" fill="none" /><path d="M20,70 C30,60 40,80 50,70 C60,60 70,80 80,70" stroke="black" stroke-width="3" fill="none" /></svg>',
-            "cross": '<svg class="card-symbol" viewBox="0 0 100 100"><line x1="20" y1="20" x2="80" y2="80" stroke="black" stroke-width="3" /><line x1="80" y1="20" x2="20" y2="80" stroke="black" stroke-width="3" /></svg>',
-            "star": '<svg class="card-symbol" viewBox="0 0 100 100"><polygon points="50,10 61,35 90,35 65,55 75,80 50,65 25,80 35,55 10,35 39,35" stroke="black" stroke-width="1" fill="none" /></svg>'
+        // DOM Elements
+        const loginForm = document.getElementById('loginForm');
+        const zenerContainer = document.getElementById('zenerContainer');
+        const successContainer = document.getElementById('successContainer');
+        const adminContainer = document.getElementById('adminContainer');
+        const keyInput = document.getElementById('keyInput');
+        const loginButton = document.getElementById('loginButton');
+        const roundIndicator = document.getElementById('roundIndicator');
+        const targetSymbol = document.getElementById('targetSymbol');
+        const cardsContainer = document.getElementById('cardsContainer');
+        const hintDots = document.getElementById('hintDots');
+        const nameInput = document.getElementById('nameInput');
+        const revealCodeBtn = document.getElementById('revealCodeBtn');
+        const accessKey = document.getElementById('accessKey');
+        const adminTableBody = document.getElementById('adminTableBody');
+        const exportButton = document.getElementById('exportButton');
+        const clearButton = document.getElementById('clearButton');
+        const completionForm = document.getElementById('completionForm');
+        const completionRecordForm = document.getElementById('completionRecordForm');
+        const formName = document.getElementById('formName');
+        const formCode = document.getElementById('formCode');
+        const formScore = document.getElementById('formScore');
+        const formTimestamp = document.getElementById('formTimestamp');
+        
+        // Symbol images in base64 format
+        const symbolImages = {
+            "circle": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgc3Ryb2tlPSIjNWQwMGIzIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiLz48L3N2Zz4=",
+            "square": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB4PSIxNSIgeT0iMTUiIHdpZHRoPSI3MCIgaGVpZ2h0PSI3MCIgc3Ryb2tlPSIjNWQwMGIzIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiLz48L3N2Zz4=",
+            "wavy-lines": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBkPSJNMjAsMzAgQzMwLDIwIDQwLDQwIDUwLDMwIEM2MCwyMCA3MCw0MCA4MCwzMCIgc3Ryb2tlPSIjNWQwMGIzIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMjAsNTAgQzMwLDQwIDQwLDYwIDUwLDUwIEM2MCw0MCA3MCw2MCA4MCw1MCIgc3Ryb2tlPSIjNWQwMGIzIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMjAsNzAgQzMwLDYwIDQwLDgwIDUwLDcwIEM2MCw2MCA3MCw4MCA4MCw3MCIgc3Ryb2tlPSIjNWQwMGIzIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiLz48L3N2Zz4=",
+            "cross": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48bGluZSB4MT0iMjAiIHkxPSIyMCIgeDI9IjgwIiB5Mj0iODAiIHN0cm9rZT0iIzVkMDBiMyIgc3Ryb2tlLXdpZHRoPSIzIi8+PGxpbmUgeDE9IjgwIiB5MT0iMjAiIHgyPSIyMCIgeTI9IjgwIiBzdHJva2U9IiM1ZDAwYjMiIHN0cm9rZS13aWR0aD0iMyIvPjwvc3ZnPg==",
+            "star": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cG9seWdvbiBwb2ludHM9IjUwLDEwIDYxLDM1IDkwLDM1IDY1LDU1IDc1LDgwIDUwLDY1IDI1LDgwIDM1LDU1IDEwLDM1IDM5LDM1IiBzdHJva2U9IiM1ZDAwYjMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg=="
         };
         
-        // Initialize particles
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+        // Event Listeners
+        loginButton.addEventListener('click', checkKey);
+        revealCodeBtn.addEventListener('click', generateAccessCode);
+        exportButton.addEventListener('click', exportData);
+        clearButton.addEventListener('click', clearData);
         
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        keyInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                checkKey();
+            }
+        });
+        
+        nameInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                generateAccessCode();
+            }
+        });
+        
+        // Function to replace Formspree form with your email
+        function setupFormspreeForm(email) {
+            const formAction = `https://formspree.io/f/${email}`;
+            completionRecordForm.action = formAction;
         }
         
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        // Call this with your Formspree form ID or setup a different service
+        // setupFormspreeForm('your-formspree-id');
         
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.color = Math.random() > 0.5 ? '#5d00b3' : '#00d0ff';
-                this.alpha = Math.random() * 0.3 + 0.1;
-            }
-            
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color + Math.floor(this.alpha * 255).toString(16).padStart(2, '0');
-                ctx.fill();
-            }
-        }
-        
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < 100; i++) {
-                particles.push(new Particle());
-            }
-        }
-        
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-            }
-            
-            requestAnimationFrame(animateParticles);
-        }
-        
-        initParticles();
-        animateParticles();
-        
-        // Check login key
+        // Functions
         function checkKey() {
-            const keyInput = document.getElementById('keyInput').value;
+            const key = keyInput.value;
             
-            if (keyInput === correctKey) {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('zenerContainer').style.display = 'block';
+            if (key === correctKey) {
+                loginForm.style.display = 'none';
+                zenerContainer.style.display = 'block';
                 initZenerChallenge();
-            } else if (keyInput === adminKey) {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('adminContainer').style.display = 'block';
+            } else if (key === adminKey) {
+                loginForm.style.display = 'none';
+                adminContainer.style.display = 'block';
                 displayAdminPanel();
             } else {
-                document.getElementById('keyInput').value = '';
-                document.getElementById('keyInput').style.border = '2px solid red';
+                keyInput.value = '';
+                keyInput.style.border = '2px solid red';
                 setTimeout(() => {
-                    document.getElementById('keyInput').style.border = 'none';
+                    keyInput.style.border = 'none';
                 }, 1000);
             }
         }
         
-        // Initialize Zener card challenge
         function initZenerChallenge() {
             // Reset variables
             currentRound = 0;
             correctAnswers = 0;
-            cardsFlipped = 0;
-            
-            // Generate random sequence for the rounds
             roundSequence = [];
+            
+            // Generate random sequence
             for (let i = 0; i < totalRounds; i++) {
                 const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
                 roundSequence.push(randomSymbol);
             }
             
-            // Initialize round indicator dots
-            const roundIndicator = document.getElementById('roundIndicator');
+            // Create round indicators
             roundIndicator.innerHTML = '';
             for (let i = 0; i < totalRounds; i++) {
                 const dot = document.createElement('div');
@@ -616,38 +414,26 @@
             startRound();
         }
         
-        // Start a new round
         function startRound() {
-            // Update target symbol text
-            const targetSymbolElement = document.getElementById('targetSymbol');
-            targetSymbolElement.textContent = roundSequence[currentRound];
+            // Update target text
+            targetSymbol.textContent = roundSequence[currentRound];
             
-            // Update progress bar
-            const progressBar = document.getElementById('progressBar');
-            progressBar.style.width = `${(currentRound / totalRounds) * 100}%`;
-            
-            // Create shuffled cards
+            // Create cards
             createCards();
             
-            // Create hint dots
+            // Update hint
             updateHintDots();
         }
         
-        // Update the hint dots
         function updateHintDots() {
-            const hintDots = document.getElementById('hintDots');
             const targetIndex = getTargetCardIndex();
-            
-            // Create dots based on position (1-indexed for user clarity)
             let dots = '';
             for (let i = 0; i < targetIndex + 1; i++) {
                 dots += '.';
             }
-            
             hintDots.textContent = dots;
         }
         
-        // Get the index of the target card in the current layout
         function getTargetCardIndex() {
             const cards = document.querySelectorAll('.card');
             const targetSymbol = roundSequence[currentRound];
@@ -658,22 +444,21 @@
                 }
             }
             
-            return 0; // Fallback
+            return 0;
         }
         
-        // Create and shuffle Zener cards
         function createCards() {
-            const cardsContainer = document.getElementById('cardsContainer');
             cardsContainer.innerHTML = '';
+            cardsFlipped = 0;
             
-            // Create a shuffled array of symbols
+            // Shuffle symbols
             let shuffledSymbols = [...symbols];
             for (let i = shuffledSymbols.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffledSymbols[i], shuffledSymbols[j]] = [shuffledSymbols[j], shuffledSymbols[i]];
             }
             
-            // Create cards for each symbol
+            // Create cards
             shuffledSymbols.forEach(symbol => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -681,39 +466,33 @@
                 
                 const cardBack = document.createElement('div');
                 cardBack.className = 'card-back';
+                cardBack.textContent = '?';
                 
                 const cardFront = document.createElement('div');
                 cardFront.className = 'card-front';
-                cardFront.innerHTML = symbolSVGs[symbol];
                 
-                const cardGlow = document.createElement('div');
-                cardGlow.className = 'card-glow';
+                const symbolImg = document.createElement('img');
+                symbolImg.className = 'symbol-img';
+                symbolImg.src = symbolImages[symbol];
+                cardFront.appendChild(symbolImg);
                 
-                card.appendChild(cardBack);
                 card.appendChild(cardFront);
-                card.appendChild(cardGlow);
+                card.appendChild(cardBack);
                 
                 card.addEventListener('click', () => flipCard(card));
                 
                 cardsContainer.appendChild(card);
             });
-            
-            // Reset cards flipped counter
-            cardsFlipped = 0;
         }
         
-        // Handle card flipping
         function flipCard(card) {
-            // Don't allow flipping if already flipped
             if (card.classList.contains('flipped')) {
                 return;
             }
             
-            // Flip the card
             card.classList.add('flipped');
             cardsFlipped++;
             
-            // Check if this is the target card
             const selectedSymbol = card.dataset.symbol;
             const targetSymbol = roundSequence[currentRound];
             
@@ -721,93 +500,70 @@
                 card.classList.add('correct');
                 correctAnswers++;
                 
-                // Update round indicator
-                const roundDots = document.querySelectorAll('.round-dot');
-                roundDots[currentRound].classList.add('correct');
+                const dots = document.querySelectorAll('.round-dot');
+                dots[currentRound].classList.add('correct');
                 
-                // Proceed to next round after delay
                 setTimeout(() => {
                     currentRound++;
                     
                     if (currentRound < totalRounds) {
-                        // Next round
-                        const roundDots = document.querySelectorAll('.round-dot');
-                        roundDots[currentRound].classList.add('active');
+                        const dots = document.querySelectorAll('.round-dot');
+                        dots[currentRound].classList.add('active');
                         startRound();
                     } else {
-                        // Challenge complete
                         finishChallenge();
                     }
                 }, 1500);
             } else {
                 card.classList.add('incorrect');
                 
-                // If all cards flipped without finding the correct one
-                if (cardsFlipped === symbols.length) {
-                    // Reveal the correct card
-                    const cards = document.querySelectorAll('.card');
-                    cards.forEach(c => {
-                        if (c.dataset.symbol === targetSymbol) {
-                            setTimeout(() => {
-                                c.classList.add('flipped');
-                                c.classList.add('correct');
-                            }, 500);
-                        }
-                    });
+                // Show all cards for this round but proceed to next round
+                document.querySelectorAll('.card').forEach(c => {
+                    if (c.dataset.symbol === targetSymbol) {
+                        setTimeout(() => {
+                            c.classList.add('flipped');
+                            c.classList.add('correct');
+                        }, 500);
+                    }
+                });
+                
+                const dots = document.querySelectorAll('.round-dot');
+                dots[currentRound].classList.add('incorrect');
+                
+                // Proceed to next round without requiring all cards to be flipped
+                setTimeout(() => {
+                    currentRound++;
                     
-                    // Update round indicator
-                    const roundDots = document.querySelectorAll('.round-dot');
-                    roundDots[currentRound].classList.add('incorrect');
-                    
-                    // Proceed to next round after delay
-                    setTimeout(() => {
-                        currentRound++;
-                        
-                        if (currentRound < totalRounds) {
-                            // Next round
-                            const roundDots = document.querySelectorAll('.round-dot');
-                            roundDots[currentRound].classList.add('active');
-                            startRound();
-                        } else {
-                            // Challenge complete
-                            finishChallenge();
-                        }
-                    }, 2000);
-                }
+                    if (currentRound < totalRounds) {
+                        const dots = document.querySelectorAll('.round-dot');
+                        dots[currentRound].classList.add('active');
+                        startRound();
+                    } else {
+                        finishChallenge();
+                    }
+                }, 2000);
             }
         }
         
-        // Finish the Zener challenge
         function finishChallenge() {
-            // Update progress bar to complete
-            const progressBar = document.getElementById('progressBar');
-            progressBar.style.width = '100%';
-            
-            // Show success screen
-            setTimeout(() => {
-                document.getElementById('zenerContainer').style.display = 'none';
-                document.getElementById('successContainer').style.display = 'block';
-            }, 1500);
+            zenerContainer.style.display = 'none';
+            successContainer.style.display = 'block';
         }
         
-        // Generate a unique access code based on user's name
         function generateAccessCode() {
-            const nameInput = document.getElementById('nameInput').value.trim();
+            const name = nameInput.value.trim();
             
-            if (nameInput.length < 2) {
+            if (name.length < 2) {
                 alert('Please enter your name (at least 2 characters)');
                 return;
             }
             
-            // Disable the button to prevent multiple submissions
-            document.getElementById('revealCodeBtn').disabled = true;
+            revealCodeBtn.disabled = true;
             
-            // Generate a unique code based on name and current time
             const timestamp = new Date().getTime();
-            const namePart = nameInput.split('').map(c => c.charCodeAt(0)).reduce((a, b) => a + b, 0);
+            const namePart = name.split('').map(c => c.charCodeAt(0)).reduce((a, b) => a + b, 0);
             const randomPart = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
             
-            // Create a complex code with special characters
             const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
             let code = "";
             const seed = timestamp + namePart;
@@ -817,21 +573,28 @@
                 code += charset.charAt(charPosition);
             }
             
-            // Insert the random part in the middle
             code = code.slice(0, 8) + randomPart + code.slice(8);
             
-            // Display the code
-            uniqueAccessCode = code;
-            document.getElementById('accessKey').textContent = uniqueAccessCode;
-            document.getElementById('accessKey').style.display = 'block';
+            accessKey.textContent = code;
+            accessKey.style.display = 'block';
             
-            // Log the completion data
-            logUserAccess(nameInput, uniqueAccessCode, correctAnswers);
+            // Log data locally
+            logUserAccess(name, code, correctAnswers);
+            
+            // Prepare form data for remote logging (uncomment to use)
+            /*
+            formName.value = name;
+            formCode.value = code;
+            formScore.value = correctAnswers + '/' + totalRounds;
+            formTimestamp.value = new Date().toString();
+            completionForm.style.display = 'block';
+            */
+            
+            // Alternate logging method - logs to console and URL
+            logToURL(name, code, correctAnswers);
         }
         
-        // Log user access to localStorage
         function logUserAccess(name, code, score) {
-            // Create log entry
             const logEntry = {
                 name: name,
                 code: code,
@@ -839,35 +602,97 @@
                 timestamp: new Date().toString()
             };
             
-            // Get existing logs or initialize empty array
-            const existingLogs = JSON.parse(localStorage.getItem('accessLogs') || '[]');
-            
-            // Add new log and save back to localStorage
-            existingLogs.push(logEntry);
-            localStorage.setItem('accessLogs', JSON.stringify(existingLogs));
+            const logs = JSON.parse(localStorage.getItem('accessLogs') || '[]');
+            logs.push(logEntry);
+            localStorage.setItem('accessLogs', JSON.stringify(logs));
             
             console.log("User access logged:", logEntry);
         }
         
-        // Display admin panel with user records
-        function displayAdminPanel() {
-            const tableBody = document.getElementById('adminTableBody');
-            tableBody.innerHTML = '';
+        // Alternate logging method - outputs to console in easier-to-copy format
+        // and creates a shareable URL with the data encoded
+        function logToURL(name, code, score) {
+            const timestamp = new Date().toString();
             
-            // Get logs from localStorage
+            // Create a formatted output for console.log
+            const formattedOutput = `
+=============================================
+NEW COMPLETION RECORD:
+=============================================
+Name: ${name}
+Code: ${code}
+Score: ${score}/${totalRounds}
+Time: ${timestamp}
+=============================================
+            `;
+            
+            console.log(formattedOutput);
+            
+            // Create a data object with the completion info
+            const data = {
+                name: name,
+                code: code,
+                score: score + '/' + totalRounds,
+                timestamp: timestamp
+            };
+            
+            // Encode the data as a query string
+            const queryString = encodeURIComponent(JSON.stringify(data));
+            
+            // Create a shareable URL with the data
+            const shareableURL = window.location.href.split('?')[0] + '?completion=' + queryString;
+            
+            console.log('Share this URL to log completion:');
+            console.log(shareableURL);
+            
+            // You can copy this URL and access the data with the getCompletionFromURL function
+        }
+        
+        // Function to extract completion data from URL
+        function getCompletionFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const completionParam = urlParams.get('completion');
+            
+            if (completionParam) {
+                try {
+                    const data = JSON.parse(decodeURIComponent(completionParam));
+                    console.log('Completion data found in URL:', data);
+                    return data;
+                } catch (e) {
+                    console.error('Error parsing completion data', e);
+                }
+            }
+            
+            return null;
+        }
+        
+        // Check for completion data in URL on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const completionData = getCompletionFromURL();
+            if (completionData) {
+                logUserAccess(
+                    completionData.name,
+                    completionData.code,
+                    parseInt(completionData.score) || 0
+                );
+                alert('Completion data from URL has been logged');
+            }
+        });
+        
+        function displayAdminPanel() {
+            adminTableBody.innerHTML = '';
+            
             const logs = JSON.parse(localStorage.getItem('accessLogs') || '[]');
             
             if (logs.length === 0) {
-                // Show message if no records
                 const row = document.createElement('tr');
                 const cell = document.createElement('td');
                 cell.colSpan = 4;
                 cell.textContent = 'No records found.';
                 cell.style.textAlign = 'center';
                 row.appendChild(cell);
-                tableBody.appendChild(row);
+                adminTableBody.appendChild(row);
             } else {
-                // Display all records
                 logs.forEach(entry => {
                     const row = document.createElement('tr');
                     
@@ -888,12 +713,11 @@
                     row.appendChild(scoreCell);
                     row.appendChild(timeCell);
                     
-                    tableBody.appendChild(row);
+                    adminTableBody.appendChild(row);
                 });
             }
         }
         
-        // Export data as CSV
         function exportData() {
             const logs = JSON.parse(localStorage.getItem('accessLogs') || '[]');
             
@@ -908,7 +732,6 @@
                 csvContent += `"${entry.name}","${entry.code}",${entry.score}/${totalRounds},"${entry.timestamp}"\n`;
             });
             
-            // Create download link
             const blob = new Blob([csvContent], { type: 'text/csv' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -917,28 +740,19 @@
             document.body.appendChild(a);
             a.click();
             
-            // Clean up
             setTimeout(() => {
                 document.body.removeChild(a);
                 window.URL.revokeObjectURL(url);
             }, 0);
         }
         
-        // Event Listeners
-        document.getElementById('loginButton').addEventListener('click', checkKey);
-        document.getElementById('revealCodeBtn').addEventListener('click', generateAccessCode);
-        document.getElementById('exportButton').addEventListener('click', exportData);
-        
-        // Enter key functionality for login
-        document.getElementById('keyInput').addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
-                checkKey();
+        function clearData() {
+            if (confirm('Are you sure you want to clear all completion records? This cannot be undone.')) {
+                localStorage.removeItem('accessLogs');
+                displayAdminPanel();
+                alert('All completion records have been cleared.');
             }
-        });
-        
-        // Enter key functionality for name input
-        document.getElementById('nameInput').addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
-                generateAccessCode();
-            }
-        });
+        }
+    </script>
+</body>
+</html>
